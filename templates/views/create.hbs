@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Create</title>
+    <link rel="icon" href="#">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/create.css">
+</head>
+
+<body>
+    <div class="main-content">
+        {{>header}}
+        <p>Create event</p>
+        <form action="/events/create" method="post">
+            <label for="fname">Name</label>
+            <input type="text" id="fname" name="name" placeholder="name">
+
+            <label for="fcategory">Category</label>
+                <select id="category" name="category">
+                <option value="Conferencia">Conferencia</option>
+                <option value="Seminario">Seminario</option>
+                <option value="Congreso">Congreso</option>
+                <option value="Curso">Curso</option>
+            </select>
+
+            <label for="lplace">Place</label>
+            <input type="text" id="lname" name="place" placeholder="place">
+
+            <label for="laddress">Address</label>
+            <input type="text" id="lname" name="address" placeholder="address">
+
+            <label for="lstartdate">Start Date</label>
+            <input type="date" id="lname" name="startDate">
+
+            <label for="lenddate">End Date</label>
+            <input type="date" id="lname" name="endDate">
+
+            <label for="lisvirtual">Is virtual?</label>
+            <input type="checkbox" name="isVirtual" value="true">
+        
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    {{>footer}}
+</body>
+
+</html>

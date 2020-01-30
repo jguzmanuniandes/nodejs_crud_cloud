@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Proyecto0</title>
+    <link rel="icon" href="#">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/table.css">
+</head>
+
+<body>
+    <div class="main-content">
+        {{>header}}
+
+        {{#unless user}}
+            <p>Welcome! To see events please login or sign in</p>
+        {{else}}
+        <a href="/events/create">Create new event</a>
+        <br />
+        <table>
+            <tr>
+                <th>Event name</th>
+                <th>Read</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            {{#each events}}
+            <tr>
+                <th>{{events.name}}</th>
+                <th>Read</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            {{/each}}
+        </table>
+        {{/unless}}
+
+    </div>
+
+    {{>footer}}
+
+</body>
+
+</html>
