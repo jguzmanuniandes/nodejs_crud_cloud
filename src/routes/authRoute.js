@@ -7,33 +7,32 @@ const jwt = require('jsonwebtoken')
 const config = require('../config/settings');
 const User = require('../models/user')
 const auth = require('../middleware/auth')
+const service = require('../services/getData')
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     const {email, password} = req.body
 
-    User.findOne({
-        where: {
-            email
-        }
-    }).then((user) => {
+    let user = await User.findOne({where: {email}})
+    if(user) {
         if(bcryptjs.compareSync(password, user.password)) {
-
             let id = user.id
-            let email = user.email
-
             const token = jwt.sign({id, email}, config.secretToken, {expiresIn: '1d'})
             res.cookie(config.cookieAuth, token, {maxAge: 86400000})
             user.token = token
             user.save()
-
-            return res.send({id, email, token})
+            res.redirect('/')
         }else {
-            return res.status(400).send('Wrong password!')
+            console.log('Wrong password!')
+            return res.render('login', {error: "Wrong credentials!"})
         }
-    }).catch((err) => {
-        console.log('Something went wrong!')
-        return res.status(400).send('Something went wrong!')
-    })
+    }
+})
+
+router.get('/logout', auth, async (req, res) => {
+    req.user.token = null
+    req.user.save()
+    res.clearCookie(config.cookieAuth);
+    res.render('index', {undefined, undefined})
 })
 
 router.post('/logout', auth, async (req, res) => {

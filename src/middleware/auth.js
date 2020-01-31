@@ -50,4 +50,4 @@ const authWithCookie = async (req, res, next) => {
     }
 }
 
-module.exports = auth
+module.exports = authWithCookie

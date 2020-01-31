@@ -16,7 +16,6 @@
         {{#unless user}}
             <p>Welcome! To see events please login or sign in</p>
         {{else}}
-        <a href="/events/create">Create new event</a>
         <br />
         <table>
             <tr>
@@ -27,10 +26,10 @@
             </tr>
             {{#each events}}
             <tr>
-                <th>{{events.name}}</th>
-                <th>Read</th>
-                <th>Update</th>
-                <th>Delete</th>
+                <th>{{name}}</th>
+                <th><a href="/events/{{id}}">read</a></th>
+                <th><a href="/events/update/{{id}}">update</a></th>
+                <th><a href="/events/delete/{{id}}">delete</a></th>
             </tr>
             {{/each}}
         </table>

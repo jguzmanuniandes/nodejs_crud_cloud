@@ -42,7 +42,10 @@ sequelize.sync()
 //sequelize.sync({force: true})
 
 app.get('', async (req, res) => {
-    res.render('index', await service.getUserAndEvents(req.cookies.authToken))
+    if(req.cookies.authToken)
+        res.render('index', await service.getUserAndEvents(req.cookies.authToken))
+    else
+        res.render('index', {undefined, undefined})
 })
 
 app.get('/signin', (req, res) => {
@@ -57,6 +60,6 @@ app.get('/create', async (req, res) => {
     res.render('create', await service.getUserAndEvents(req.cookies.authToken))
 })
 
-app.listen(3000, (err, result) => {
+app.listen(8080, (err, result) => {
     console.log('Server is running');
 });
